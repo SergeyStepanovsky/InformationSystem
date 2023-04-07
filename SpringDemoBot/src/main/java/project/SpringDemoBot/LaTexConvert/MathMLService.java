@@ -27,10 +27,10 @@ public class MathMLService {
     @Path("/{formula}")
     @Produces(MediaType.TEXT_PLAIN)
     public String getMathMLFormula(@PathParam("formula") String formula) throws Exception {
-        SnuggleEngine engine = new SnuggleEngine();
-        SnuggleSession session = engine.createSession();
-        SnuggleInput input = new SnuggleInput(formula);
-        SnuggleOutput output = session.parseInput(input);
+//         SnuggleEngine engine = new SnuggleEngine();
+//         SnuggleSession session = engine.createSession();
+//         SnuggleInput input = new SnuggleInput(formula);
+//         SnuggleOutput output = session.parseInput(input);
 
         Document document = output.createMathMLDocument();
         DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
