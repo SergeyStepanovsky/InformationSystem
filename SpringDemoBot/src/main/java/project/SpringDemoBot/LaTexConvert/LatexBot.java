@@ -57,6 +57,7 @@ public class LatexBot extends TelegramLongPollingBot {
         Graphics2D g2 = image.createGraphics();
         g2.setColor(Color.GREEN);
         g2.fillRect(0, 0, icon.getIconWidth(), icon.getIconHeight());
+        //родитель класса TexIcon прдставляет текс в граф итерфейсе gui
         JLabel jl = new JLabel();
         jl.setForeground(Color.GREEN);
         icon.paintIcon(jl, g2, 0, 0);
