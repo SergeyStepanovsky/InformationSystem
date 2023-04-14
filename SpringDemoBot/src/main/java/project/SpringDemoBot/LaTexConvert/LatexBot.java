@@ -20,32 +20,45 @@ import java.io.IOException;
 public class LatexBot extends TelegramLongPollingBot {
 
     @Override
-    public void onUpdateReceived(Update update) {
-        // Получение сообщения от пользователя
+    //Этот метод используется для получения сообщения от пользователя
+    //кароч, когда приходит новое сообщение вызывается этот метод
+    // и хоба, мы начинаем это сообщение обрабатывать
+
+
+    public void onUpdateReceived(Update update) {// класс update  представляет собой обновление, полученное от сервера Telegram
+        // Получение сообщения от пользователя в нём содержится входящая информация
         Message message = update.getMessage();
+        // в этом условии идёт проверка на пустое сообщение и наличие ткста
         if (message == null || !message.hasText()) {
             return;
         }
+        //Получаем текст сообщения
         String text = message.getText();
 
         // Попытка преобразования текста в формулу LaTeX
         TeXFormula formula;
         try {
-            formula = new TeXFormula(text);
+               formula = new TeXFormula(text);
+               formula.setBackground(Color.GREEN);
         } catch (Exception e) {
             return;
         }
 
         // Создание объекта TeXIcon с заданным размером и стилем
-        TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_DISPLAY, 20);
+        //этот объект представляет изображение формулы
+        TeXIcon icon = formula.createTeXIcon(TeXConstants.STYLE_SCRIPT, 20);
 
         // Получение изображения из объекта TeXIcon
+        //BufferedImage — это класс, представляющий
+        // изображение в памяти,
+        // которое можно использовать для хранения
+        // и манипуляции пикселами.
         BufferedImage image = new BufferedImage(icon.getIconWidth(), icon.getIconHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics2D g2 = image.createGraphics();
-        g2.setColor(Color.WHITE);
+        g2.setColor(Color.GREEN);
         g2.fillRect(0, 0, icon.getIconWidth(), icon.getIconHeight());
         JLabel jl = new JLabel();
-        jl.setForeground(Color.BLACK);
+        jl.setForeground(Color.GREEN);
         icon.paintIcon(jl, g2, 0, 0);
 
         // Отправка изображения пользователю в Telegram
